@@ -1,0 +1,46 @@
+<section>
+  <h2 class=" title">Models</h2>
+  <div>
+    <table mat-table [dataSource]="dataSource"
+           class="table" matSort #sort="matSort">
+
+      <ng-container matColumnDef="position">
+        <th mat-header-cell *matHeaderCellDef> No.</th>
+        <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="CPI">
+        <th mat-header-cell *matHeaderCellDef> CPI</th>
+        <td mat-cell *matCellDef="let element"> {{element.CPI}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="AMNS">
+        <th mat-header-cell *matHeaderCellDef> AMNS</th>
+        <td mat-cell *matCellDef="let element"> {{element.AMNS}} </td>
+      </ng-container>
+      <ng-container matColumnDef="IRW">
+        <th mat-header-cell *matHeaderCellDef> IRW</th>
+        <td mat-cell *matCellDef="let element"> {{element.IRW}} </td>
+      </ng-container>
+      <ng-container matColumnDef="IIP">
+        <th mat-header-cell *matHeaderCellDef> IIP</th>
+        <td mat-cell *matCellDef="let element"> {{element.IIP}} </td>
+      </ng-container>
+      <ng-container matColumnDef="button">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="primary" (click)="navigateModel(element)">To model</button>
+      </td>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+  </div>
+</section>

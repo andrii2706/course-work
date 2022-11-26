@@ -1,0 +1,27 @@
+<section>
+  <div class="close-btn">
+    <button mat-icon-button (click)="closeModal()"><mat-icon>close</mat-icon></button>
+  </div>
+  <form class="form" [formGroup]="clisifcatorForm" (ngSubmit)="submitClasisificator()">
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Найменування класифікатора</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Ідентифікатор</mat-label>
+      <input matInput type="text" formControlName="id">
+    </mat-form-field>
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Номер класифікатора</mat-label>
+      <input matInput type="text"  formControlName="number">
+    </mat-form-field>
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Класифікатор</mat-label>
+      <input matInput type="text"  formControlName="count">
+    </mat-form-field>
+    <div class="buttons">
+      <a mat-button (click)="cleareForm()" > Очистити форму </a>
+      <button mat-button [disabled]="clisifcatorForm.invalid"  color="primary">Відправити класифікатор в таблицю</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,23 @@
+.sidenav-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep .mat-drawer-container{
+  height: 100vh;
+  background: none;
+}
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sidenav {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
