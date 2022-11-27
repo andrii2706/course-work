@@ -1,4 +1,4 @@
-import {Component,  OnInit,  ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {ModelsTable} from "../interfaces/models-table";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatSort} from "@angular/material/sort";
@@ -21,7 +21,8 @@ export class ModelsComponent implements OnInit {
     private router: Router,
               private _snackBar: MatSnackBar,
               private activatedRouter: ActivatedRoute,
-              private  clasificatorServiceService:ClasificatorServiceService
+              private  clasificatorServiceService:ClasificatorServiceService,
+              private cdr: ChangeDetectorRef
   ) {
   }
   private regions : ModelsTable[]
@@ -39,6 +40,7 @@ export class ModelsComponent implements OnInit {
       this.regions = model;
       this.dataSource = new MatTableDataSource(this.regions);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges()
     }, error => this.openSnackBar(`internal Server Error, ${error.status} `) )
   }
   openSnackBar(message:string) {

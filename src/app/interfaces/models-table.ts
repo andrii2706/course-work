@@ -1,24 +1,25 @@
 export interface ModelsTable {
-  id: number | null,
+  id: string | null,
   name: string | null,
   position: string | null,
   CPI: number ,
   AMNS: number ,
   IRW: number ,
   IIP: number,
-  count?: CountOfModel[]
 }
 export interface Model {
-  id: number | null,
+  id: string | null,
   name: string | null,
   position: string | null,
   CPI: number ,
   AMNS: number ,
   IRW: number ,
   IIP: number,
-  count?: CountOfModel[]
 }
 export interface CountOfModel {
-  id: number | null | undefined,
-  sum: number
+  countObject:{
+    id: string | null | undefined,
+    name: string | null | undefined,
+    sum: number
+  }
 }

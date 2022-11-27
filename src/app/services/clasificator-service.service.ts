@@ -26,7 +26,11 @@ export class ClasificatorServiceService {
       return  value?.length ? value[0] : null
     }))
   }
-  sendSumm(countObject: CountOfModel): Observable<ModelsTable>{
-    return this.httpClient.post<ModelsTable>(`${environment.APi}/${this.region}/${countObject.id}`, {countObject})
+
+  sendSumm(countObject: { name: string | null | undefined; sum: number; id: string }, id: string): Observable<ModelsTable>{
+    return this.httpClient.post<ModelsTable>(`${environment.APi}/${this.counts}?id=${id}`, {countObject})
+  }
+  getSum(id:number): Observable<CountOfModel[] | null> {
+    return this.httpClient.get<CountOfModel[]>(`${environment.APi}/${this.counts}`)
   }
 }

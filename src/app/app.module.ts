@@ -19,6 +19,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { ModelComponent } from './model/model.component';
 import {HttpClientModule} from "@angular/common/http";
 import { SnackbarNotificationComponent } from './shared/snackbar-notification/snackbar-notification.component';
+import {SharedModule} from "./shared/shared/shared.module";
 
 const routes: Routes = [
   {
@@ -55,7 +56,8 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule ,
     HttpClientModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    SharedModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]
