@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ClasificatorServiceService} from "../services/clasificator-service.service";
-import {CountOfModel, Model} from "../interfaces/models-table";
+import {RegionServiceService} from "../shared/shared/services/region-service.service";
+import {CountOfModel, Model, ModelsTable} from "../interfaces/models-table";
 
 @Component({
   selector: 'app-model',
@@ -9,13 +9,13 @@ import {CountOfModel, Model} from "../interfaces/models-table";
   styleUrls: ['./model.component.scss']
 })
 export class ModelComponent implements OnInit {
-  @Input() model: Model | null;
+  @Input() model: ModelsTable | null;
   emptyCountObject: {}
-  counts : { name: string | null | undefined; sum: number; id: string }
+  counts : { name: string | null | undefined; id: string }
   count: CountOfModel[] | null
   id:string
   constructor(private activatedRoute: ActivatedRoute,
-              private clasificatorServiceService: ClasificatorServiceService,
+              private regionServiceService: RegionServiceService,
               private cdr: ChangeDetectorRef
   ) {
   }
@@ -30,13 +30,13 @@ export class ModelComponent implements OnInit {
   }
 
   getModel(id: number) {
-    this.clasificatorServiceService.getOneModel(id).subscribe(model => {
+    this.regionServiceService.getOneModel(id).subscribe(model => {
       this.model = model;
       this.cdr.detectChanges()
     })
   }
   getCountOfModel(id:number){
-    this.clasificatorServiceService.getSum(id).subscribe(sum => {
+    this.regionServiceService.getSum(id).subscribe(sum => {
       if(sum){
         this.count = sum;
       this.count = this.count.filter( countOfModal => countOfModal.countObject.id === this.id)
@@ -45,12 +45,11 @@ export class ModelComponent implements OnInit {
     })
   }
 
-  makeCalculations(cpi: number , amns: number , irw: number , iip: number ,) {
-    let sum: number;
-    sum = cpi + amns ;
-    this.counts =  Object.assign( {  id: this.id, name: this.model?.name, sum},  this.emptyCountObject )
+  makeCalculations() {
 
-    this.clasificatorServiceService.sendSumm(this.counts, this.id).subscribe(() => {
+    this.counts =  Object.assign( {  id: this.id, name: this.model?.name},  this.emptyCountObject )
+
+    this.regionServiceService.sendSumm(this.counts, this.id).subscribe(() => {
         this.getCountOfModel(+this.id)
       this.cdr.detectChanges()
    }, error => console.error(error.status))

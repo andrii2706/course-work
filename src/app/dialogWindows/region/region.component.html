@@ -1,1 +1,19 @@
-<p>region works!</p>
+<section>
+  <div class="close-btn">
+    <button mat-icon-button (click)="closeModal()"><mat-icon>close</mat-icon></button>
+  </div>
+  <form class="form" [formGroup]="region" (ngSubmit)="submitRegion()">
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Область</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="example-form-field" appearance="fill">
+      <mat-label>Позиція</mat-label>
+      <input matInput type="text" formControlName="position">
+    </mat-form-field>
+    <div class="buttons">
+      <button mat-button (click)="cleareForm()" > Очистити форму </button>
+      <button mat-button [disabled]="region.invalid"  color="primary">Відправити класифікатор в таблицю</button>
+    </div>
+  </form>
+</section>

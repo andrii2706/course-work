@@ -4,7 +4,7 @@ import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ClasificatorServiceService} from "../services/clasificator-service.service";
+import {RegionServiceService} from "../shared/shared/services/region-service.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -21,14 +21,14 @@ export class ModelsComponent implements OnInit {
     private router: Router,
               private _snackBar: MatSnackBar,
               private activatedRouter: ActivatedRoute,
-              private  clasificatorServiceService:ClasificatorServiceService,
+              private  regionServiceService:RegionServiceService,
               private cdr: ChangeDetectorRef
   ) {
   }
   private regions : ModelsTable[]
   public region: ModelsTable;
   public dataSource: MatTableDataSource<ModelsTable>
-  displayedColumns: string[] = ['position', 'name', 'CPI', 'AMNS', 'IRW','IIP', 'button'];
+  displayedColumns: string[] = ['position', 'name', 'TA', 'button'];
   ngOnInit(): void {
     this.getDataFormTable();
   }
@@ -36,7 +36,7 @@ export class ModelsComponent implements OnInit {
 
 
   getDataFormTable(){
-    this.clasificatorServiceService.getData().subscribe(model => {
+    this.regionServiceService.getData().subscribe(model => {
       this.regions = model;
       this.dataSource = new MatTableDataSource(this.regions);
       this.dataSource.sort = this.sort;

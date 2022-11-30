@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {CountOfModel, ModelsTable} from "../interfaces/models-table";
+import {CountOfModel, ModelsTable} from "../../../interfaces/models-table";
 import {map, Observable} from "rxjs";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ClasificatorServiceService {
+export class RegionServiceService {
   region = "region"
   counts = 'counts'
   constructor(private httpClient: HttpClient) { }
@@ -15,6 +15,11 @@ export class ClasificatorServiceService {
   getData(): Observable<ModelsTable[]>{
     return this.httpClient.get<ModelsTable[]>(`${environment.APi}/${this.region}`)
   }
+
+  sendRegion(region: ModelsTable): Observable<ModelsTable>{
+  return this.httpClient.post<ModelsTable>(`${environment.APi}/${this.region}`, {region})
+  }
+
   getOneModel(id: number): Observable<ModelsTable | null>{
     return this.httpClient.get<ModelsTable[]>(`${environment.APi}/${this.region}`, {
       params: new HttpParams({
@@ -27,7 +32,7 @@ export class ClasificatorServiceService {
     }))
   }
 
-  sendSumm(countObject: { name: string | null | undefined; sum: number; id: string }, id: string): Observable<ModelsTable>{
+  sendSumm(countObject: { name: string | null | undefined; id: string }, id: string): Observable<ModelsTable>{
     return this.httpClient.post<ModelsTable>(`${environment.APi}/${this.counts}?id=${id}`, {countObject})
   }
   getSum(id:number): Observable<CountOfModel[] | null> {
