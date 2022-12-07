@@ -1,3 +1,13 @@
 .region-info{
   color: black;
 }
+.region-table-parent{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.region-table{
+  flex-direction: column;
+  border: 1px solid black;
+}

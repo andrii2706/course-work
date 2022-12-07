@@ -1,9 +1,13 @@
 <section class="region-info" *ngIf ="model">
     <h2>{{model.name}}</h2>
 
-
-  <div *ngFor="let countInfoObj of count">
-    <h2>{{countInfoObj.countObject.name}}</h2>
-    <p>{{countInfoObj.countObject.sum}}</p>
+<div class="region-table-parent">
+  <div *ngFor="let countInfoObj of count, let i = index" >
+    <h2>{{countInfoObj.name}}</h2>
+    <div *ngFor="let statistic of countInfoObj.statistic" class="region-table">
+      <span>{{statistic.year}}</span> - <span>{{statistic.totalInfoCount}}</span>
+    </div>
+    <h2>Середнє значення: {{middleCountOfClasificator[i]}}</h2>
   </div>
+</div>
 </section>

@@ -35,7 +35,5 @@ export class RegionServiceService {
   sendSumm(countObject: { name: string | null | undefined; id: string }, id: string): Observable<ModelsTable>{
     return this.httpClient.post<ModelsTable>(`${environment.APi}/${this.counts}?id=${id}`, {countObject})
   }
-  getSum(id:number): Observable<CountOfModel[] | null> {
-    return this.httpClient.get<CountOfModel[]>(`${environment.APi}/${this.counts}`)
-  }
+
 }

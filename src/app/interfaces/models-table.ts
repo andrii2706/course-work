@@ -24,7 +24,12 @@ export interface CountOfModel {
 export interface Clasificator {
   id: number,
   name: string,
-  modelId: string,
-  year: string,
-  totalInfoCount: number,
+  modelId: number,
+  statistic: Statistic[]
+
+}
+export interface Statistic {
+      id: number,
+      year: string,
+      totalInfoCount: number,
 }
