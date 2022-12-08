@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {RegionServiceService} from "../shared/shared/services/region-service.service";
-import {Clasificator, CountOfModel, Model, ModelsTable} from "../interfaces/models-table";
+import {Clasificator, ModelsTable} from "../interfaces/models-table";
 import {ClasificatoreService} from "../shared/shared/services/clasificatore.service";
 import {MatTableDataSource} from "@angular/material/table";
 
@@ -77,39 +77,41 @@ export class ModelComponent implements OnInit {
   secondStepOfCalculation(middleCount: number[], oneCount: Clasificator[] | null){
     let secondTimeCal: number
     let emptyArr: number[] = []
-    let emptyArr1: number[] = []
-    let emptyArr2: number[] = []
-    let emptyArr3: number[] = []
-    oneCount?.forEach(value => {
-      if(value.name === 'Капітальні інвестиції'){
+
+    oneCount?.forEach((value, index) => {
+      if(value.modelId === +this.id && value.id === index) {
+        const arr: number[] | null | undefined = emptyArr;
+        let newArr : number[] | null | undefined = [];
         value.statistic.forEach(value => {
           secondTimeCal = (value.totalInfoCount / middleCount[0])
-          emptyArr.push(Number(secondTimeCal.toFixed(5)))
+        emptyArr.push(Number(secondTimeCal.toFixed(5)))
+
         })
-      }else if (value.name === 'Рівень Зайнятості населення ') {
-        value.statistic.forEach(value => {
-          secondTimeCal = (value.totalInfoCount / middleCount[1])
-          emptyArr1.push(Number(secondTimeCal.toFixed(5)))
-        })
-      }else if(value.name === 'Рівень безробіття населення'){
-        value.statistic.forEach(value => {
-          secondTimeCal = (value.totalInfoCount / middleCount[2])
-          emptyArr2.push(Number(secondTimeCal.toFixed(5)))
-        })
-      }else if (value.name === 'Середня зарплата за місяць'){
-        value.statistic.forEach(value => {
-          secondTimeCal = (value.totalInfoCount / middleCount[3])
-          emptyArr3.push(Number(secondTimeCal.toFixed(5)))
-        })
+        for (let i = 0; i < arr?.length; i += 10) {
+          newArr = emptyArr?.slice(i, i + 10) ?? [0];
+        }
+        value.secondStepCalc = newArr
       }
     })
-    this.thirdStepOfCalculation(emptyArr, emptyArr1, emptyArr2, emptyArr3);
+    this.thirdStepOfCalculation(oneCount);
   }
-  thirdStepOfCalculation( z1: number[], z2: number[], z3: number[], z4:number[] ){
-    console.log(z1);
-    console.log(z2);
-    console.log(z3);
-    console.log(z4);
+
+  thirdStepOfCalculation(  oneCount: Clasificator[] | null | undefined){
+    oneCount?.forEach((count, index) => {
+     const i = index
+      switch (count.id) {
+        case i:
+            if (count.typeOfClasificatore){
+              const max =  Math.max(...count.secondStepCalc ?? [0]);
+              count.thirdStepCalc = max
+            }else{
+              const min = Math.min(...count.secondStepCalc ?? [0])
+              count.thirdStepCalc = min
+            }
+          break
+      }
+    })
+
 
     this.fourthStepOfCalculation();
   }

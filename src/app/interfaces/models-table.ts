@@ -24,7 +24,10 @@ export interface CountOfModel {
 export interface Clasificator {
   id: number,
   name: string,
+  typeOfClasificatore: boolean
   modelId: number,
+  secondStepCalc: number[] | null | undefined,
+  thirdStepCalc: number | null | undefined,
   statistic: Statistic[]
 
 }
