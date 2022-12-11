@@ -28,6 +28,8 @@ export interface Clasificator {
   modelId: number,
   secondStepCalc: number[] | null | undefined,
   thirdStepCalc: number | null | undefined,
+  fourthStepCalc?: number[] | null | undefined,
+  fifthStepCalc: number | null | undefined,
   statistic: Statistic[]
 
 }
