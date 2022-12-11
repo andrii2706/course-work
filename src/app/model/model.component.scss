@@ -3,13 +3,20 @@
 }
 .region-table-parent{
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 20px;
 }
 .region-table{
+  padding: 10px 35px;
   flex-direction: column;
   border: 1px solid black;
+  h2{
+    border-bottom: 1px solid black;
+  }
+}
+.paddingTop-20{
+  padding: 20px;
 }
 .button-fourth{
   border-left: 1px solid black;
