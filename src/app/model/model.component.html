@@ -4,19 +4,37 @@
   >Обрахунки
   </button>
   <div class="region-table-parent">
-    <div *ngFor="let countInfoObj of count, let i = index" class="region-table">
-      <h2>{{countInfoObj.name}}</h2>
-      <div *ngFor="let statistic of countInfoObj.statistic">
-        <span>{{statistic.year}}</span> - <span>{{statistic.totalInfoCount }}</span>
-      </div>
-    </div>
+    <table>
+      <thead>
+      <tr>
+        <th></th>
+        <th *ngFor="let countInfo of oneCount">
+          {{countInfo.year}}
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let countObj of count, let i = index ">
+        <td>{{countObj.name}}</td>
+        <td *ngFor="let statistic of countObj.statistic, let i = index" >
+            {{statistic.totalInfoCount}}
+        </td>
+        <td >
+          Середнє значення: {{middleCountOfClasificator[i]}}
+        </td>
+        <td>
+          <h3>Обрахунок стимуляторів та дестимуляторів(P0) = {{countObj.thirdStepCalc}}</h3>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+<!--    <div *ngFor="let countInfoObj of count, let i = index" class="region-table">-->
+<!--      <h2>{{countInfoObj.name}}</h2>-->
+<!--      <div *ngFor="let statistic of countInfoObj.statistic">-->
+<!--        <span>{{statistic.year}}</span> - <span>{{statistic.totalInfoCount }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
     <div class="button-fourth">
-    </div>
-  </div>
-  <div class="region-table-parent paddingTop-20">
-    <div *ngFor="let countInfoObj of count, let i = index">
-      <h2>Середнє значення: {{middleCountOfClasificator[i]}}</h2>
-      <h3>Обрахунок стимуляторів та дестимуляторів(P0) = {{countInfoObj.thirdStepCalc}}</h3>
     </div>
   </div>
   <div class="calculation-block">
