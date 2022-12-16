@@ -11,6 +11,8 @@
         <th *ngFor="let countInfo of oneCount">
           {{countInfo.year}}
         </th>
+        <th>Середнє значення</th>
+        <th>Вектор етлонних значень</th>
       </tr>
       </thead>
       <tbody>
@@ -20,10 +22,10 @@
             {{statistic.totalInfoCount}}
         </td>
         <td >
-          Середнє значення: {{middleCountOfClasificator[i]}}
+           {{middleCountOfClasificator[i]}}
         </td>
         <td>
-          <h3>Обрахунок стимуляторів та дестимуляторів(P0) = {{countObj.thirdStepCalc}}</h3>
+          <h3>{{countObj.thirdStepCalc}}</h3>
         </td>
       </tr>
       </tbody>
@@ -34,6 +36,7 @@
 <!--        <span>{{statistic.year}}</span> - <span>{{statistic.totalInfoCount }}</span>-->
 <!--      </div>-->
 <!--    </div>-->
+    <h3>Вектор відстане від еталону</h3>
     <div class="button-fourth">
     </div>
   </div>
