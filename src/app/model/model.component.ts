@@ -4,6 +4,7 @@ import {RegionServiceService} from "../shared/shared/services/region-service.ser
 import {Clasificator, ModelsTable, Statistic} from "../interfaces/models-table";
 import {ClasificatoreService} from "../shared/shared/services/clasificatore.service";
 import {MatTableDataSource} from "@angular/material/table";
+import * as math from "mathjs";
 
 @Component({
   selector: 'app-model',
@@ -23,6 +24,7 @@ export class ModelComponent implements OnInit {
   iterdFourCount : number | null | undefined
   di : number | null | undefined
   k: number | null | undefined;
+  secondTimeCal: number
   id:string
   public dataSource: MatTableDataSource<Clasificator>
   displayedColumns: string[] = [ 'Область', 'Вихідні Данні'];
@@ -70,37 +72,30 @@ export class ModelComponent implements OnInit {
     let emptyArr: number[] = []
     this.count?.forEach(value => {
       this.oneCount = value?.statistic
-      this.totalCount = value?.statistic.reduce((acc, object) => {
-        return acc + object.totalInfoCount;
-      }, 0)
-      this.total = (value?.statistic.length - 1)
+      this.totalCount = 0
+      for (let i = 0; i < this.oneCount.length ; i++) {
+        this.totalCount += this.oneCount[i].totalInfoCount
+      }
+      this.total = 23
       this.middleCount = this.totalCount / this.total
      const mCount = this.middleCount
-      console.log(mCount)
       emptyArr.push(Number(mCount))
     })
     this.middleCountOfClasificator = emptyArr;
     this.secondStepOfCalculation(this.middleCountOfClasificator, this.count)
   }
   secondStepOfCalculation(middleCount: number[], oneCount: Clasificator[] | null){
-    let secondTimeCal: number
+
     let emptyArr: number[] = []
 
-    oneCount?.forEach((value, index) => {
+    oneCount?.map((value, index) => {
       if(value.modelId === +this.id && value.id === index) {
-        let newArr : number[] | null | undefined = [];
+        let newArr: number[] | null | undefined = [];
         let i = index
-        value.statistic.forEach((value) => {
-          secondTimeCal = (value.totalInfoCount / middleCount[i])
-          emptyArr.push(secondTimeCal)
-          // console.log(emptyArr)
+        value.secondStepCalc = value.statistic.map((value, index) => {
+          return this.secondTimeCal = (value.totalInfoCount / middleCount[i])
         })
-        console.log(emptyArr)
-        for (let i = 0; i < emptyArr?.length; i += 23) {
-          newArr = emptyArr?.slice(i, i + 23) ?? [0];
-          console.log(newArr)
-        }
-        value.secondStepCalc = newArr
+
       }
     })
     this.thirdStepOfCalculation(oneCount);
@@ -185,7 +180,6 @@ export class ModelComponent implements OnInit {
     emptyArr5: any, emptyArr6: any, emptyArr7: any, emptyArr8: any,
     emptyArr9: any, emptyArr10: any,
     oneCount: Clasificator[] | null | undefined ){
-    //TODO More zi
     let z1: number | null | undefined
     let z2: number | null | undefined
     let z3: number | null | undefined
@@ -224,7 +218,7 @@ export class ModelComponent implements OnInit {
       value.fourthStepCalc = this.fourthCountOfClasificator
     })
 
-    if(z1 && z2 && z3 && z4 && z5 && z6 && z7 && z8 && z9 && z10 && z11){
+    if(z1 && z2 && z3 && z4 && z5 && z6 && z7 && z8 && z9 && z10){
       const fourthCount = [
         +Math.pow((Math.pow(emptyArr[0] - z1, 2) + Math.pow(emptyArr2[0] - z2 , 2) + Math.pow(emptyArr3[0] - z3 , 2) + Math.pow(emptyArr4[0] - z4 , 2) + Math.pow(emptyArr5[0] - z5 , 2) + Math.pow(emptyArr6[0] - z6 , 2) + Math.pow(emptyArr7[0] - z7 , 2) + Math.pow(emptyArr8[0] - z8 , 2) + Math.pow(emptyArr9[0] - z9 , 2) + Math.pow(emptyArr10[0] - z10 , 2)) , 0.5),
         +Math.pow((Math.pow(emptyArr[1] - z1, 2) + Math.pow(emptyArr2[1] - z2 , 2) + Math.pow(emptyArr3[1] - z3 , 2) + Math.pow(emptyArr4[1] - z4 , 2) + Math.pow(emptyArr5[1] - z5 , 2) + Math.pow(emptyArr6[1] - z6 , 2) + Math.pow(emptyArr7[1] - z7 , 2) + Math.pow(emptyArr8[1] - z8 , 2) + Math.pow(emptyArr9[1] - z9 , 2) + Math.pow(emptyArr10[1] - z10 , 2)) , 0.5),
@@ -249,6 +243,7 @@ export class ModelComponent implements OnInit {
         +Math.pow((Math.pow(emptyArr[20] - z1, 2) + Math.pow(emptyArr2[20] - z2 , 2) + Math.pow(emptyArr3[20] - z3 , 2) + Math.pow(emptyArr4[20] - z4 , 2) + Math.pow(emptyArr5[20] - z5 , 2) + Math.pow(emptyArr6[20] - z6 , 2) + Math.pow(emptyArr7[20] - z7 , 2) + Math.pow(emptyArr8[20] - z8 , 2) + Math.pow(emptyArr9[20] - z9 , 2) + Math.pow(emptyArr10[20] - z10 , 2)) , 0.5),
         +Math.pow((Math.pow(emptyArr[21] - z1, 2) + Math.pow(emptyArr2[21] - z2 , 2) + Math.pow(emptyArr3[21] - z3 , 2) + Math.pow(emptyArr4[21] - z4 , 2) + Math.pow(emptyArr5[21] - z5 , 2) + Math.pow(emptyArr6[21] - z6 , 2) + Math.pow(emptyArr7[21] - z7 , 2) + Math.pow(emptyArr8[21] - z8 , 2) + Math.pow(emptyArr9[21] - z9 , 2) + Math.pow(emptyArr10[21] - z10 , 2)) , 0.5),
         +Math.pow((Math.pow(emptyArr[22] - z1, 2) + Math.pow(emptyArr2[22] - z2 , 2) + Math.pow(emptyArr3[22] - z3 , 2) + Math.pow(emptyArr4[22] - z4 , 2) + Math.pow(emptyArr5[22] - z5 , 2) + Math.pow(emptyArr6[22] - z6 , 2) + Math.pow(emptyArr7[22] - z7 , 2) + Math.pow(emptyArr8[22] - z8 , 2) + Math.pow(emptyArr9[22] - z9 , 2) + Math.pow(emptyArr10[22] - z10, 2)) , 0.5)
+        +Math.pow((Math.pow(emptyArr[23] - z1, 2) + Math.pow(emptyArr2[23] - z2 , 2) + Math.pow(emptyArr3[23] - z3 , 2) + Math.pow(emptyArr4[23] - z4 , 2) + Math.pow(emptyArr5[22] - z5 , 2) + Math.pow(emptyArr6[23] - z6 , 2) + Math.pow(emptyArr7[22] - z7 , 2) + Math.pow(emptyArr8[23] - z8 , 2) + Math.pow(emptyArr9[23] - z9 , 2) + Math.pow(emptyArr10[23] - z10, 2)) , 0.5)
       ]
       this.fourthCountOfClasificator= fourthCount
       this.fourthCountOfClasificator.forEach( (value) => {
