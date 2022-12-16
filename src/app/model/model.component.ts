@@ -248,7 +248,7 @@ export class ModelComponent implements OnInit {
       this.fourthCountOfClasificator= fourthCount
       this.fourthCountOfClasificator.forEach( (value) => {
         const d1 = this.elementRef.nativeElement.querySelector('.button-fourth');
-        d1.insertAdjacentHTML('beforeend', `<div class="two">${value}</div>`);
+        d1.insertAdjacentHTML('beforeend', `<div class="two" style="padding-top: 20px">${value}</div>`);
       })
     }
 
