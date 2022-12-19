@@ -123,7 +123,10 @@ export class ModelComponent implements OnInit {
               if(count?.secondStepCalc){
                 let max
                 for (let j = 0; j < count.secondStepCalc.length; j++) {
-                   max =  Math.max(count.secondStepCalc[j]);
+                  if(count.secondStepCalc[j] > 0 ){
+                    max =  Math.max(count.secondStepCalc[j]);
+                  }
+                  console.log(max, count.name)
                 }
               count.thirdStepCalc = max
               }
